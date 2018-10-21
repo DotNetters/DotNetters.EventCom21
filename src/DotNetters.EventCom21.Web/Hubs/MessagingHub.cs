@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using DotNetters.EventCom21.Web.UserRegistration;
 using Microsoft.AspNetCore.SignalR;
 
 namespace DotNetters.EventCom21.Web.Hubs
@@ -19,6 +20,8 @@ namespace DotNetters.EventCom21.Web.Hubs
         /// <returns></returns>
         public Task Send(string user, string message)
         {
+            UsersRegister.AddUser(user);
+
             return Clients.All.SendAsync("Send", user, message);
         }
     }
