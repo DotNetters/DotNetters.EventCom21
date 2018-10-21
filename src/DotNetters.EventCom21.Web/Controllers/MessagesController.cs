@@ -32,7 +32,9 @@ namespace DotNetters.EventCom21.Web.Controllers
         {
             await UsersRegister.AddUser(messageData.User);
 
-            await MessagingHubContext.Clients.All.SendAsync("Send", messageData.User, messageData.Message);
+            var dateStr = $"{DateTime.Now.ToShortDateString()} {DateTime.Now.ToShortTimeString()}";
+
+            await MessagingHubContext.Clients.All.SendAsync("Send", messageData.User, messageData.Message, dateStr);
 
             return Ok(messageData);
         }
