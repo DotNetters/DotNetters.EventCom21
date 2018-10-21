@@ -7,18 +7,11 @@ using System.Text;
 
 namespace DotNetters.EventCom21.ViewModels
 {
-    public class ViewModelBase : BindableBase, INavigationAware, IDestructible
+    public abstract class ViewModel : BindableBase, INavigationAware, IDestructible
     {
         protected INavigationService NavigationService { get; private set; }
 
-        private string _title;
-        public string Title
-        {
-            get { return _title; }
-            set { SetProperty(ref _title, value); }
-        }
-
-        public ViewModelBase(INavigationService navigationService)
+        public ViewModel(INavigationService navigationService)
         {
             NavigationService = navigationService;
         }
