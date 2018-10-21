@@ -18,11 +18,11 @@ namespace DotNetters.EventCom21.Web.Hubs
         /// <param name="user">Nick del usuario que envía el mensaje</param>
         /// <param name="message">Texto del mensaje</param>
         /// <returns></returns>
-        public Task Send(string user, string message)
+        public async Task Send(string user, string message)
         {
-            UsersRegister.AddUser(user);
-
-            return Clients.All.SendAsync("Send", user, message);
+            await UsersRegister.AddUser(user);
+            var dateStr = $"{DateTime.Now.ToShortDateString()} {DateTime.Now.ToShortTimeString()}";
+            await Clients.All.SendAsync("Send", user, message, dateStr);
         }
     }
 }

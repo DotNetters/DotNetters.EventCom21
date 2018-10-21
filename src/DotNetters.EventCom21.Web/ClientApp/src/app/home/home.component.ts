@@ -27,10 +27,8 @@ export class HomeComponent implements OnInit {
     ngOnInit() {
         this._hubConnection = new signalR.HubConnectionBuilder().withUrl("/messaging").build();
 
-        this._hubConnection.on('Send', (user: string, message: string) => {
-            let d = new Date();
-            let dStr = d.getDate() + '/' + d.getMonth() + 1 + '/' + d.getFullYear() + ' ' + d.getHours() + ':' + d.getMinutes();
-            this.messages.unshift({ 'user': user, 'message': message, 'sentorreceived': 'Received', 'date': dStr  });
+        this._hubConnection.on('Send', (user: string, message: string, dateStr: string) => {
+          this.messages.unshift({ 'user': user, 'message': message, 'sentorreceived': 'Received', 'date': dateStr  });
         });
 
         this._hubConnection.start()

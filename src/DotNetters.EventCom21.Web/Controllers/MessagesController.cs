@@ -30,7 +30,7 @@ namespace DotNetters.EventCom21.Web.Controllers
         [HttpPost]
         public async Task<IActionResult> Post([FromBody]MessagePost messageData)
         {
-            UsersRegister.AddUser(messageData.User);
+            await UsersRegister.AddUser(messageData.User);
 
             await MessagingHubContext.Clients.All.SendAsync("Send", messageData.User, messageData.Message);
 
