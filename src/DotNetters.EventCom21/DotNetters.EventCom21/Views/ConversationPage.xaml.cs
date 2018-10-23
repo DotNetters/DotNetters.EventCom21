@@ -2,9 +2,9 @@
 
 namespace DotNetters.EventCom21.Views
 {
-    public partial class HelloWorld : ContentPage
+    public partial class ConversationPage : ContentPage
     {
-        public HelloWorld()
+        public ConversationPage()
         {
             InitializeComponent();
         }

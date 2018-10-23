@@ -4,16 +4,14 @@ using Prism.Navigation;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace DotNetters.EventCom21.ViewModels
 {
-    public class MainPageViewModel : ViewModel
-    {
-        public MainPageViewModel(INavigationService navigationService)
-            : base(navigationService)
+	public class ConversationPageViewModel : ViewModel
+	{
+        public ConversationPageViewModel(INavigationService navigationService) : base(navigationService)
         {
+
         }
 
         private DelegateCommand navigateToConnectedUsersCommand;
@@ -26,7 +24,7 @@ namespace DotNetters.EventCom21.ViewModels
             //await NavigationService.NavigateAsync("ConnectedUsersPage", navParams, false, false);
             var navParams = new NavigationParameters();
 
-            navParams.Add("fromToolbar", true);
+            navParams.Add("fromToolbar", false);
 
             await NavigationService.NavigateAsync("ConnectedUsersPage", navParams);
         }

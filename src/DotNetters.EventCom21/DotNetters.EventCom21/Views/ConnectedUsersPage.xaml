@@ -4,8 +4,8 @@
              xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
              xmlns:conv="clr-namespace:DotNetters.EventCom21.Converters;assembly=DotNetters.EventCom21"
              prism:ViewModelLocator.AutowireViewModel="True"
-             x:Class="DotNetters.EventCom21.Views.HelloWorld"
-             Title="{Binding Greeting}">
+             x:Class="DotNetters.EventCom21.Views.ConnectedUsersPage"
+             Title="Usuarios conectados">
 
     <ContentPage.Resources>
         <ResourceDictionary>
@@ -13,11 +13,10 @@
         </ResourceDictionary>
     </ContentPage.Resources>
 
-    <StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Padding="5">
-        <Label Text="Introduce tu nombre:" HorizontalOptions="FillAndExpand" />
-        <Entry Text="{Binding UserName}" HorizontalOptions="FillAndExpand" />
-        <Label IsVisible="{Binding UserNameTyped}" Text="{Binding UserName, StringFormat='Tu nombre es {0}'}"/>
-        <Label IsVisible="{Binding UserNameTyped, Converter={StaticResource not}}" Text="No has escrito ningún nombre todavía"/>
+    <StackLayout Orientation="Vertical" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Padding="5">
+        <Label Text="Usuarios conectados"/>
+        <Label Text="Me han abierto desde el toolbar" IsVisible="{Binding FromToolbar}"/>
+        <Label Text="Me han abierto desde una página" IsVisible="{Binding FromToolbar, Converter={StaticResource not}}"/>
     </StackLayout>
   
 </ContentPage>
