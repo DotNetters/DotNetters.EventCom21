@@ -5,9 +5,33 @@
              prism:ViewModelLocator.AutowireViewModel="True"
              x:Class="DotNetters.EventCom21.Views.ConversationPage">
 
-    <StackLayout Orientation="Vertical" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Padding="5">
+    <!--<StackLayout Orientation="Vertical" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Padding="5">
         <Label Text="Conversation"/>
         <Button Text="Usuarios conectados" Command="{Binding NavigateToConnectedUsersCommand}"/>
-    </StackLayout>
-   
+    </StackLayout>-->
+    
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="Enviar" Command="{Binding SendCommand}" />
+    </ContentPage.ToolbarItems>
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="22"/>
+        </Grid.RowDefinitions>
+        <Grid Margin="5" Grid.Row="0" Grid.Column="0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="18"/>
+                <RowDefinition Height="40"/>
+                <RowDefinition Height="18"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <Label Grid.Row="0" Grid.Column="0" Text="Usuario" />
+            <Entry Grid.Row="1" Grid.Column="0" Text="{Binding UserName}"/>
+            <Label Grid.Row="2" Grid.Column="0" Text="Mensaje"/>
+            <Editor Grid.Row="3" Grid.Column="0" Keyboard="Chat" Text="{Binding Message}" />
+        </Grid>
+        <Label Margin="3" HorizontalTextAlignment="Center" Grid.Row="1" Grid.Column="0" Text="{Binding StatusInfo}" FontSize="Micro"/>
+    </Grid>
+
 </ContentPage>

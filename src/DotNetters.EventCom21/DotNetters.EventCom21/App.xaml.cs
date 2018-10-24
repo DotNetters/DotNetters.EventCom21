@@ -4,6 +4,7 @@ using DotNetters.EventCom21.ViewModels;
 using DotNetters.EventCom21.Views;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
+using DotNetters.EventCom21.Services;
 
 [assembly: XamlCompilation(XamlCompilationOptions.Compile)]
 namespace DotNetters.EventCom21
@@ -33,6 +34,8 @@ namespace DotNetters.EventCom21
             containerRegistry.RegisterForNavigation<ConversationPage, ConversationPageViewModel>();
             containerRegistry.RegisterForNavigation<UserConfigurationPage, UserConfigurationPageViewModel>();
             containerRegistry.RegisterForNavigation<ConnectedUsersPage, ConnectedUsersPageViewModel>();
+
+            containerRegistry.Register<IMessageSender, MessageSender>();
         }
     }
 }
