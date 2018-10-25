@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <TabbedPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:local="clr-namespace:DotNetters.EventCom21.Views"
+             xmlns:views="clr-namespace:DotNetters.EventCom21.Views"
              xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
              x:Class="DotNetters.EventCom21.Views.MainPage"
              Title="Preguntador">
@@ -10,7 +10,9 @@
         <ToolbarItem Text="Usuarios" Command="{Binding NavigateToConnectedUsersCommand}" />
     </TabbedPage.ToolbarItems>
 
-    <local:ConversationPage Title="Conversación"/>
-    <local:UserConfigurationPage Title="Config"/>
+    <TabbedPage.Children>
+        <views:ConversationPage Title="Conversación" />
+        <views:UserConfigurationPage Title="Config" />
+    </TabbedPage.Children>
 
 </TabbedPage>
