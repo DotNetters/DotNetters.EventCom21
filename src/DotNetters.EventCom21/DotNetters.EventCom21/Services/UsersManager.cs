@@ -25,7 +25,7 @@ namespace DotNetters.EventCom21.Services
             };
         }
 
-        public async Task<IEnumerable<string>> GetConnectedUsers()
+        public async Task<IEnumerable<string>> GetConnectedUsersAsync()
         {
             var result = new List<string>();
 
