@@ -36,6 +36,7 @@ namespace DotNetters.EventCom21
             containerRegistry.RegisterForNavigation<ConnectedUsersPage, ConnectedUsersPageViewModel>();
 
             containerRegistry.Register<IMessageSender, MessageSender>();
+            containerRegistry.Register<IUsersManager, UsersManager>();
         }
     }
 }

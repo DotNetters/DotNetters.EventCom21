@@ -198,5 +198,23 @@
       <Name>DotNetters.EventCom21</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\config.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\config%402x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\config%403x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\conversation.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\conversation%402x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\conversation%403x.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
 </Project>
