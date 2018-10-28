@@ -21,12 +21,10 @@ namespace DotNetters.EventCom21.Services
         {
             httpClient = new HttpClient
             {
-                MaxResponseContentBufferSize = 256000
+                MaxResponseContentBufferSize = 256000,
+                BaseAddress = new Uri(REST_URL)
             };
-
-            httpClient.BaseAddress = new Uri(REST_URL);
         }
-
         public async Task<(string message, bool success)> SendAsync(string user, string message)
         {
             var onError = false;

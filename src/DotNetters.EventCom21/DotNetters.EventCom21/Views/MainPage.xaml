@@ -11,8 +11,22 @@
     </TabbedPage.ToolbarItems>
 
     <TabbedPage.Children>
-        <views:ConversationPage Title="Conversación" />
-        <views:UserConfigurationPage Title="Config" />
+        <views:ConversationPage Title="Conversación">
+            <ContentPage.Icon>
+                <OnPlatform x:TypeArguments="FileImageSource">
+                    <On Platform="iOS" Value="conversation.png"/>
+                    <On Platform="Android" Value="baseline_record_voice_over_24.png"/>
+                </OnPlatform>
+            </ContentPage.Icon>
+        </views:ConversationPage>
+        <views:UserConfigurationPage Title="Config">
+            <ContentPage.Icon>
+                <OnPlatform x:TypeArguments="FileImageSource">
+                    <On Platform="iOS" Value="config.png"/>
+                    <On Platform="Android" Value="baseline_settings_applications_24.png"/>
+                </OnPlatform>
+            </ContentPage.Icon>
+        </views:UserConfigurationPage>
     </TabbedPage.Children>
 
 </TabbedPage>

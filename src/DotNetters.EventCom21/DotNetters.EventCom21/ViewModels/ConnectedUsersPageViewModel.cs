@@ -1,31 +1,34 @@
-﻿using Prism.Commands;
+﻿using DotNetters.EventCom21.Services;
+using Prism.Commands;
 using Prism.Mvvm;
 using Prism.Navigation;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 
 namespace DotNetters.EventCom21.ViewModels
 {
 	public class ConnectedUsersPageViewModel : ViewModel
 	{
-        public ConnectedUsersPageViewModel(INavigationService navigationService) : base(navigationService)
-        {
+        IUsersManager UsersManager { get; set; } = null;
 
+        public ConnectedUsersPageViewModel(INavigationService navigationService, IUsersManager usersManager) : base(navigationService)
+        {
+            UsersManager = usersManager ?? throw new ArgumentNullException(nameof(usersManager));
         }
 
-        public override void OnNavigatedTo(INavigationParameters parameters)
+        public async override void OnNavigatedTo(INavigationParameters parameters)
         {
             base.OnNavigatedTo(parameters);
 
-            FromToolbar = (bool)parameters["fromToolbar"];
+            var users = await UsersManager.GetConnectedUsers();
+            foreach (var user in users)
+            {
+                Users.Add(user);
+            }
         }
 
-        private bool fromToolbar;
-        public bool FromToolbar
-        {
-            get { return fromToolbar; }
-            set { SetProperty(ref fromToolbar, value); }
-        }
+        public ObservableCollection<string> Users { get; set; } = new ObservableCollection<string>();
     }
 }
