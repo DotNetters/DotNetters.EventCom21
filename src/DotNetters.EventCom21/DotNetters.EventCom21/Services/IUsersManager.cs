@@ -12,6 +12,6 @@ namespace DotNetters.EventCom21.Services
         /// Obtiene los usuarios que se han conectado al sistema desde su inicio
         /// </summary>
         /// <returns></returns>
-        Task<IEnumerable<string>> GetConnectedUsers();
+        Task<IEnumerable<string>> GetConnectedUsersAsync();
     }
 }

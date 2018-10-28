@@ -22,7 +22,7 @@ namespace DotNetters.EventCom21.ViewModels
         {
             base.OnNavigatedTo(parameters);
 
-            var users = await UsersManager.GetConnectedUsers();
+            var users = await UsersManager.GetConnectedUsersAsync();
             foreach (var user in users)
             {
                 Users.Add(user);
