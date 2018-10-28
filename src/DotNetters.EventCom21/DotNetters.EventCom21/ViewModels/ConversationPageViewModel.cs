@@ -2,6 +2,9 @@
 using Prism.Commands;
 using Prism.Navigation;
 using System;
+using System.Threading.Tasks;
+using Xamarin.Essentials;
+using Xamarin.Forms;
 
 namespace DotNetters.EventCom21.ViewModels
 {
@@ -12,6 +15,26 @@ namespace DotNetters.EventCom21.ViewModels
         public ConversationPageViewModel(INavigationService navigationService, IMessageSender messageSender) : base(navigationService)
         {
             MessageSender = messageSender ?? throw new ArgumentNullException(nameof(messageSender));
+            ReadUserConfiguration();
+            MessagingCenter.Subscribe<UserConfigurationPageViewModel, string>(this, "UserConfigured", (sender, arg) => {
+                UserName = arg;
+                UserConfigured = true;
+            });
+        }
+
+        void ReadUserConfiguration()
+        {
+            var usrName = Preferences.Get("EventCom.UserName", string.Empty);
+            if (usrName == string.Empty)
+            {
+                UserName = null;
+                UserConfigured = false;
+            }
+            else
+            {
+                UserName = usrName;
+                UserConfigured = true;
+            }
         }
 
         private DelegateCommand navigateToConnectedUsersCommand;
@@ -20,8 +43,6 @@ namespace DotNetters.EventCom21.ViewModels
 
         async void NavigateToConnectedUsersAsync()
         {
-            //await NavigationService.NavigateAsync("ConnectedUsersPage");
-            //await NavigationService.NavigateAsync("ConnectedUsersPage", navParams, false, false);
             var navParams = new NavigationParameters();
 
             navParams.Add("fromToolbar", false);
@@ -55,6 +76,22 @@ namespace DotNetters.EventCom21.ViewModels
             set
             {
                 SetProperty(ref userName, value);
+            }
+        }
+
+        bool userConfigured;
+        /// <summary>
+        /// Indica si el usuario ha sido configurado
+        /// </summary>
+        public bool UserConfigured
+        {
+            get
+            {
+                return userConfigured;
+            }
+            set
+            {
+                SetProperty(ref userConfigured, value);
             }
         }
 

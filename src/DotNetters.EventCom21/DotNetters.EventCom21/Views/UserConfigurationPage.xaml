@@ -5,8 +5,14 @@
              prism:ViewModelLocator.AutowireViewModel="True"
              x:Class="DotNetters.EventCom21.Views.UserConfigurationPage">
 
-    <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Padding="5">
-        <Label Text="Configuration"/>
-    </StackLayout>
+
+    <Grid Margin="5" Grid.Row="0" Grid.Column="0">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="18"/>
+            <RowDefinition Height="40"/>
+        </Grid.RowDefinitions>
+        <Label Grid.Row="0" Grid.Column="0" Text="¿Qué nombre de usuario (nick name) quieres usar?" />
+        <Entry Grid.Row="1" Grid.Column="0" Text="{Binding UserName}"/>
+    </Grid>
     
 </ContentPage>

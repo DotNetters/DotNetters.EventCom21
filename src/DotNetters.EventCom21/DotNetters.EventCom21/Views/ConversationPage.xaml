@@ -2,17 +2,19 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
+             xmlns:conv="clr-namespace:DotNetters.EventCom21.Converters;assembly=DotNetters.EventCom21"
              prism:ViewModelLocator.AutowireViewModel="True"
              x:Class="DotNetters.EventCom21.Views.ConversationPage">
-
-    <!--<StackLayout Orientation="Vertical" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Padding="5">
-        <Label Text="Conversation"/>
-        <Button Text="Usuarios conectados" Command="{Binding NavigateToConnectedUsersCommand}"/>
-    </StackLayout>-->
     
     <ContentPage.ToolbarItems>
         <ToolbarItem Text="Enviar" Command="{Binding SendCommand}" />
     </ContentPage.ToolbarItems>
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <conv:BooleanNegationConverter x:Key="not" />
+        </ResourceDictionary>
+    </ContentPage.Resources>
 
     <Grid>
         <Grid.RowDefinitions>
@@ -22,14 +24,13 @@
         <Grid Margin="5" Grid.Row="0" Grid.Column="0">
             <Grid.RowDefinitions>
                 <RowDefinition Height="18"/>
-                <RowDefinition Height="40"/>
                 <RowDefinition Height="18"/>
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
-            <Label Grid.Row="0" Grid.Column="0" Text="Usuario" />
-            <Entry Grid.Row="1" Grid.Column="0" Text="{Binding UserName}"/>
-            <Label Grid.Row="2" Grid.Column="0" Text="Mensaje"/>
-            <Editor Grid.Row="3" Grid.Column="0" Keyboard="Chat" Text="{Binding Message}" />
+            <Label Grid.Row="0" Grid.Column="0" IsVisible="{Binding UserConfigured}" Text="{Binding UserName}"/>
+            <Label Grid.Row="0" Grid.Column="0" IsVisible="{Binding UserConfigured, Converter={StaticResource not}}" Text="Configura tu nick en la pestaña 'Config'"/>
+            <Label Grid.Row="1" Grid.Column="0" Text="Mensaje"/>
+            <Editor Grid.Row="2" Grid.Column="0" Keyboard="Chat" Text="{Binding Message}" />
         </Grid>
         <Label Margin="3" HorizontalTextAlignment="Center" Grid.Row="1" Grid.Column="0" Text="{Binding StatusInfo}" FontSize="Micro"/>
     </Grid>
