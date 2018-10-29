@@ -19,17 +19,17 @@
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
-            <RowDefinition Height="22"/>
+            <RowDefinition Height="24"/>
         </Grid.RowDefinitions>
         <Grid Margin="5" Grid.Row="0" Grid.Column="0">
             <Grid.RowDefinitions>
-                <RowDefinition Height="18"/>
-                <RowDefinition Height="18"/>
+                <RowDefinition Height="20"/>
+                <RowDefinition Height="20"/>
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
-            <Label Grid.Row="0" Grid.Column="0" IsVisible="{Binding UserConfigured}" Text="{Binding UserName}"/>
-            <Label Grid.Row="0" Grid.Column="0" IsVisible="{Binding UserConfigured, Converter={StaticResource not}}" Text="Configura tu nick en la pestaña 'Config'"/>
-            <Label Grid.Row="1" Grid.Column="0" Text="Mensaje"/>
+            <Label Grid.Row="0" Grid.Column="0" FontAttributes="Bold" IsVisible="{Binding UserConfigured}" Text="{Binding UserName, StringFormat='Tu nick es {0}'}"/>
+            <Label Grid.Row="0" Grid.Column="0" TextColor="Red" IsVisible="{Binding UserConfigured, Converter={StaticResource not}}" Text="Configura tu nick en la pestaña 'Config'"/>
+            <Label Grid.Row="1" Grid.Column="0" Text="¿Cuál es tu pregunta o sugerencia?"/>
             <Editor Grid.Row="2" Grid.Column="0" Keyboard="Chat" Text="{Binding Message}" />
         </Grid>
         <Label Margin="3" HorizontalTextAlignment="Center" Grid.Row="1" Grid.Column="0" Text="{Binding StatusInfo}" FontSize="Micro"/>

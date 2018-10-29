@@ -1,6 +1,7 @@
 ﻿using DotNetters.EventCom21.Services;
 using Prism.Commands;
 using Prism.Navigation;
+using Prism.Services;
 using System;
 using System.Threading.Tasks;
 using Xamarin.Essentials;
@@ -12,29 +13,38 @@ namespace DotNetters.EventCom21.ViewModels
 	{
         IMessageSender MessageSender { get; set; } = null;
 
-        public ConversationPageViewModel(INavigationService navigationService, IMessageSender messageSender) : base(navigationService)
+        IPageDialogService PageDialogService { get; set; } = null;
+
+        public ConversationPageViewModel(INavigationService navigationService, IPageDialogService dialogService, IMessageSender messageSender) : base(navigationService)
         {
             MessageSender = messageSender ?? throw new ArgumentNullException(nameof(messageSender));
+            PageDialogService = dialogService ?? throw new ArgumentNullException(nameof(dialogService));
             ReadUserConfiguration();
             MessagingCenter.Subscribe<UserConfigurationPageViewModel, string>(this, "UserConfigured", (sender, arg) => {
                 UserName = arg;
-                UserConfigured = true;
+                if (string.IsNullOrWhiteSpace(UserName))
+                {
+                    UserConfigured = false;
+                }
+                else
+                {
+                    UserConfigured = true;
+                }
             });
         }
 
         void ReadUserConfiguration()
         {
             var usrName = Preferences.Get("EventCom.UserName", string.Empty);
-            if (usrName == string.Empty)
+            if (string.IsNullOrWhiteSpace(usrName))
             {
-                UserName = null;
                 UserConfigured = false;
             }
             else
             {
-                UserName = usrName;
                 UserConfigured = true;
             }
+            UserName = usrName;
         }
 
         private DelegateCommand navigateToConnectedUsersCommand;
@@ -56,11 +66,18 @@ namespace DotNetters.EventCom21.ViewModels
 
         async void SendAsync()
         {
-            StatusInfo = "Enviando mensaje...";
-            var result = await MessageSender.SendAsync(UserName, Message);
-            StatusInfo = result.message;
-            if (result.success)
-                Clear();
+            if (!UserConfigured)
+            {
+                await PageDialogService.DisplayAlertAsync("Error", "No has configurado tu nick. Ve a la pestaña config, e indícalo para poder hacer preguntas o enviar sugerencias", "Cerrar");
+            }
+            else
+            {
+                StatusInfo = "Enviando mensaje...";
+                var result = await MessageSender.SendAsync(UserName, Message);
+                StatusInfo = result.message;
+                if (result.success)
+                    Clear();
+            }
         }
 
         string userName;

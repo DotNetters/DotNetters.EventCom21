@@ -35,10 +35,7 @@ namespace DotNetters.EventCom21.ViewModels
             set
             {
                 SetProperty(ref userName, value);
-                if (!string.IsNullOrWhiteSpace(userName))
-                {
-                    SetUserInPreferences();
-                }
+                SetUserInPreferences();
             }
         }
     }
